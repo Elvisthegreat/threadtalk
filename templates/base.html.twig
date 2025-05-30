@@ -35,7 +35,7 @@
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Dropdown link
+								More Settings
 							</a>
 							<ul class="dropdown-menu">
 								<li>
@@ -45,11 +45,26 @@
 									<a class="dropdown-item" href="#">Another action</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="#">Something else here</a>
+									{% if app.user %}
+										<a class="dropdown-item" href="#">Profile</a>
+										<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+									{% else %}
+										<a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
+									{% endif %}
 								</li>
 							</ul>
 						</li>
 					</ul>
+					<div class="login-info ms-auto bg-success my-2 px-2 rounded">
+						{% if app.user %}
+							<div class="mb-auto text-light fs-6">
+								<em><small>You are logged in as {{ app.user.userIdentifier }}</small></em>
+							</div>
+						{% else %}
+							<a href="{{ path('app_register') }}">Register</a>
+							<a href="{{ path('app_login') }}">Log in</a>
+						{% endif %}
+					</div>
 				</div>
 			</div>
 		</nav>
