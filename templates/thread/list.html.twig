@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="overlay"></div>
+<section class="container-fluid my-3">
+    <h1 class="text-capitalize text-center"><small>TrendingTalk!</small></h1>
+    <div class="row">
+        {% for thread in threads %}
+            <div class="col-12 col-md-2 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ thread.title }}</h5>
+                        <p class="card-text">{{ thread.description }}</p>
+                        <small class="text-muted">{{ thread.createdAt|date('Y-m-d H:i') }}</small>
+                    </div>
+                </div> 
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

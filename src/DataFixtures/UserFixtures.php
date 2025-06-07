@@ -12,7 +12,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $thread = new Threadtalk();
-        $thread->setTitle('Welcome to Threadtalk');
+        $thread->setTitle('Welcome to Threadtalk Hello from Data fixtures!');
         $thread->setDescription('This is the first thread in the Threadtalk application. Feel free to start a discussion!');
         $thread->setCreatedAt(new \DateTimeImmutable());
         // Fetch an existing user
