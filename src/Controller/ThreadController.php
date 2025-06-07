@@ -17,4 +17,13 @@ final class ThreadController extends AbstractController
             'threads' => $repository->findAll(),
         ]);
     }
+
+    // Show a specific thread and ensures only numeric IDs are passed <\d+>
+    #[Route('/threads/{id<\d+>}', name : 'thread_show')]
+    public function show(Threadtalk $thread): Response
+    {
+        return $this->render('/thread/show.html.twig', [
+            'thread' => $thread
+        ]);
+    }
 }

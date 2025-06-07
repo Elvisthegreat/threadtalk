@@ -29,6 +29,22 @@ class UserFixtures extends Fixture
 
         $manager->persist($thread);
 
+        $thread = new Threadtalk();
+        $thread->setTitle('Second Trend Talk');
+        $thread->setDescription('This is the second thread in the Threadtalk application. Feel free to start a discussion!');
+        $thread->setCreatedAt(new \DateTimeImmutable());
+        // Fetch an existing user
+        $user = $manager->getRepository(User::class)->findOneBy(['email' => 'amadinelvis6@gmail.com']);
+
+        if ($user) {
+            $thread->setAuthor($user); // Assign the user as the author
+        } else {
+            // Handle case where user is not found
+            echo "User not found. Make sure this user exists in the database.\n";
+        }
+
+        $manager->persist($thread);
+
         $manager->flush();
     }
 }
