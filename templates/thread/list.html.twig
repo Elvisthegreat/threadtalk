@@ -18,6 +18,16 @@
                 </div> 
             </div>
         {% endfor %}
+        {% if threads|length == 0 %}
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <strong>No threads available at the moment.</strong>
+                </div>
+            </div>
+        {% endif %}
+        <div class="text-center mt-4">
+            <a class="btn btn-primary btn-lg px-3" href="{{ path('thread_new') }}">Create New Trend</a>
+        </div>
     </div>
 </section>
 {% endblock %}
