@@ -32,6 +32,11 @@ a {
     cursor: pointer;
 }
 
+.btn-hover:hover {
+    color: #fff;
+    background-color: #ff0000;
+}
+
 
 footer {
     margin-top: auto;
