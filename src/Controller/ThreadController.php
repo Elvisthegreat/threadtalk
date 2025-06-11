@@ -58,4 +58,27 @@ final class ThreadController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    // Edit an existing thread
+    #[Route('/thread/edit/{id<\d+>}', name: 'thread_edit')]
+    public function edit(Threadtalk $thread, Request $request, EntityManagerInterface $manager): Response
+    {
+        // Create a form for the Threadtalk entity
+        $form = $this->createForm(ThreadtalkForm::class, $thread);
+
+        // Handle the request and check if the form is submitted and valid
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Update the thread in the database
+            $manager->flush();
+
+            // Redirect to the thread list after successful update
+            return $this->redirectToRoute('thread_list');
+        }
+
+        return $this->render('thread/edit.html.twig', [
+            'form' => $form,
+        ]);
+    }
 }

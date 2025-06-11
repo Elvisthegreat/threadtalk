@@ -10,6 +10,7 @@
                         <h5 class="card-title">{{ thread.title }}</h5>
                             <p class="card-text">{{ thread.description }}</p>
                             <small class="text-muted">{{ thread.createdAt|date('Y-m-d H:i') }}</small>
+                            <a href="{{ path('thread_edit', {'id' : thread.id}) }}" class="btn btn-sm btn-outline-primary shadow-sm px-2">Edit Trend</a>
                     </div>
                 </div> 
             </div>
