@@ -77,11 +77,30 @@ final class ThreadController extends AbstractController
             $this->addFlash('notice', 'Your changes updated successfully.');
 
             // Redirect to the thread list after successful update
-            return $this->redirectToRoute('thread_list');
+            return $this->redirectToRoute('thread_show');
         }
 
         return $this->render('thread/edit.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    // Delete a thread
+    #[Route('/thread/delete/{id<d+>}', name: 'thread_delete')]
+    public function delete(Threadtalk $thread, Request $request, EntityManagerInterface $manager): Response
+    {
+        // Check if method is POST
+        if ($request->isMethod('POST')) {
+            $manager->remove($thread);
+            $manager->flush();
+            $this->addFlash('notice', 'Your thread has been deleted successfully.');
+
+            // Redirect to the thread list after successful deletion
+            return $this->redirectToRoute('thread_list');
+        }
+
+        return $this->render('thread/delete.html.twig', [
+            'id' => $thread->getId(),
         ]);
     }
 }
