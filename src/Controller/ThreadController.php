@@ -47,6 +47,7 @@ final class ThreadController extends AbstractController
 
             // Save the new thread to the database
             $manager->flush();
+            $this->addFlash('notice', 'Your thread has been created successfully.');
 
             // Redirect to the thread list after successful creation
             return $this->redirectToRoute('thread_show', [
@@ -72,6 +73,8 @@ final class ThreadController extends AbstractController
 
             // Update the thread in the database
             $manager->flush();
+
+            $this->addFlash('notice', 'Your changes updated successfully.');
 
             // Redirect to the thread list after successful update
             return $this->redirectToRoute('thread_list');

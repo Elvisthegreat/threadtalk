@@ -49,8 +49,22 @@
 				</div>
 			</div>
 		</nav>
+
+		{% for message in app.flashes('notice') %}
+			<div class="flash-notice row justify-content-center alert alert-success alert-dismissible fade show" role="alert" id="notice-message">
+				{{ message }}
+			</div>
+		{% endfor %}
+		
 		{% block body %}{% endblock %}
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+		<script>
+			noticeMessage = document.getElementById('notice-message')
+			setTimeout(function() {
+				noticeMessage.style.display = 'none';
+			}, 4000); // 4000 milliseconds = 4 seconds
+		</script>
+		
 		<footer class="bg-dark text-white py-4">
 			<div class="container text-center">
 				<p>&copy; 2025 ThreadTalk. All rights reserved.</p>
