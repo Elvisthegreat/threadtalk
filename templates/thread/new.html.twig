@@ -10,25 +10,37 @@
                         <h3 class="mb-0">Create a New Thread</h3>
                     </div>
                     <div class="card-body">
-                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
-                        
-                        <div class="mb-3">
-                            {{ form_row(form.title) }}
-                        </div>
+                        {% if app.user %}
+                            {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                            
+                            <div class="mb-3">
+                                {{ form_row(form.title) }}
+                            </div>
 
-                        <div class="mb-3">
-                            {{ form_row(form.description) }}
-                        </div>
+                            <div class="mb-3">
+                                {{ form_row(form.description) }}
+                            </div>
 
-                        <div class="mb-3">
-                            {{ form_row(form.created_at) }}
-                        </div>
+                            <div class="mb-3">
+                                {{ form_row(form.created_at) }}
+                            </div>
 
-                        <div class="text-end mt-3">
-                            {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success px-4'} }) }}
-                        </div>
+                            <div class="text-end mt-3">
+                                {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success px-4'} }) }}
+                            </div>
 
-                        {{ form_end(form) }}
+                            {{ form_end(form) }}
+                        {% else %}
+                            <div class="col-12">
+                                <div class="alert alert-warning text-center">
+                                    <strong>Please log in to create new trend.</strong>
+                                    <div class="mt-3">
+                                        <a href="{{ path('app_login') }}" class="btn btn-primary mx-2">Login</a>
+                                        <a href="{{ path('app_register') }}" class="btn btn-outline-secondary mx-2">Register</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
