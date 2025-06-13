@@ -5,7 +5,7 @@
 {% block body %}
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="w-100" style="max-width: 400px;">
-            <form method="post" class="text-center p-4 shadow-lg rounded">
+            <form action="{{ path('app_login') }}" method="post" class="text-center p-4 shadow-lg rounded">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
