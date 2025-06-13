@@ -12,8 +12,8 @@ when@test:
     framework:
         test: true
         session:
-            storage_factory_id: session.storage.factory.mock_file
+            storage_factory_id: session.storage.factory.native
         form:
         csrf_protection:
             enabled: true
-            field_name: 'custom_token_name'
+            field_name: '_csrf_token'
