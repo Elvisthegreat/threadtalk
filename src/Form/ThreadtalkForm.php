@@ -17,9 +17,7 @@ class ThreadtalkForm extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('created_at', null, [
-                'widget' => 'single_text',
-            ])
+           // ->add('created_at', null, ['widget' => 'single_text',])
             ->add('author', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'email',

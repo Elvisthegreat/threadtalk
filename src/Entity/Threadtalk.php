@@ -7,6 +7,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ThreadtalkRepository::class)]
+// Tells Doctrine to look for lifecycle callback methods (e.g., @PrePersist, @PreUpdate)
+// so actions like automatically setting timestamps can happen before saving or updating.
+#[ORM\HasLifecycleCallbacks]
+
 class Threadtalk
 {
     #[ORM\Id]
@@ -26,6 +30,7 @@ class Threadtalk
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
+
 
     public function getId(): ?int
     {
@@ -61,12 +66,12 @@ class Threadtalk
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    #[ORM\PrePersist] // For automatically setting the created_at field before the entity is persisted
+    public function setCreatedAtValue(): void
     {
-        $this->created_at = $created_at;
-
-        return $this;
+        $this->created_at = new \DateTimeImmutable();
     }
+
 
     public function getAuthor(): ?User
     {

@@ -13,7 +13,7 @@
                         <h5 class="card-title">{{ thread.title }}</h5>
                         <a href="{{ path('thread_show', {'id': thread.id}) }}">
                             <p class="card-text">{{ thread.description }}</p>
-                            <small class="text-muted">{{ thread.createdAt|date('Y-m-d H:i') }}</small>
+                            <small class="text-muted"><em>Created on:</em> {{ thread.createdAt|date('Y-m-d H:i') }}</small>
                         </a>
                     </div>
                 </div> 
