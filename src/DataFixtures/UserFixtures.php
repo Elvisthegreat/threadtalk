@@ -14,7 +14,7 @@ class UserFixtures extends Fixture
         $thread = new Threadtalk();
         $thread->setTitle('Welcome to Threadtalk Hello from Data fixtures!');
         $thread->setDescription('This is the first thread in the Threadtalk application. Feel free to start a discussion!');
-        $thread->setCreatedAt(new \DateTimeImmutable());
+       // $thread->setCreatedAt(new \DateTimeImmutable());
         // Fetch an existing user
         $user = $manager->getRepository(User::class)->findOneBy(['email' => 'amadinelvis6@gmail.com']);
 
@@ -32,7 +32,7 @@ class UserFixtures extends Fixture
         $thread = new Threadtalk();
         $thread->setTitle('Second Trend Talk');
         $thread->setDescription('This is the second thread in the Threadtalk application. Feel free to start a discussion!');
-        $thread->setCreatedAt(new \DateTimeImmutable());
+       // $thread->setCreatedAt(new \DateTimeImmutable());
         // Fetch an existing user
         $user = $manager->getRepository(User::class)->findOneBy(['email' => 'amadinelvis6@gmail.com']);
 

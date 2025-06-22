@@ -11,6 +11,10 @@ framework:
     trusted_proxies: '127.0.0.1,REMOTE_ADDR'
     trusted_headers: [ 'x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-port', 'x-forwarded-host' ]
     # end
+
+    router:
+        default_uri: 'https://thread-talk-f6a6b35bf026.herokuapp.com'
+
     
     #esi: true
     #fragments: true
