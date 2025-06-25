@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Threadtalk;
 use App\Repository\ThreadtalkRepository;
 use App\Form\ThreadtalkForm;
+use App\Entity\Comment;
+use App\Form\CommentTypeForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,11 +25,28 @@ final class ThreadController extends AbstractController
 
     // Show a specific trend and ensures only numeric IDs are passed <\d+>
     #[Route('/threads/{id<\d+>}', name : 'thread_show')]
-    public function show(Threadtalk $thread): Response
+    public function show(Threadtalk $thread, Request $request, EntityManagerInterface $manager): Response
     {
-        return $this->render('/thread/show.html.twig', [
-            'thread' => $thread
+        $comment = new Comment();
+        $comment->setAuthor($this->getUser());
+
+        $form = $this->createForm(CommentTypeForm::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($comment);
+            $manager->flush();
+
+            $this->addFlash('notice', 'Comment added!');
+            return $this->redirectToRoute('thread_show', ['id' => $thread->getId()]);
+        }
+
+        return $this->render('thread/show.html.twig', [
+            'thread' => $thread,
+            'form' => $form->createView(),
         ]);
+
+
     }
 
     // Create a new trend
