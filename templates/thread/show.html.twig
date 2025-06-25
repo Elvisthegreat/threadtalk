@@ -18,19 +18,18 @@
         </div>
         <div class="mt-4">
             <h3 class="mb-4">Comments</h3>
-
             {% for comment in thread.comments %}
                 <div class="card mb-3 shadow-sm">
                     <div class="card-body d-flex align-items-start">
                         <div class="me-3">
-                            <div class="rounded-circle bg-primary text-white text-center" style="width:40px; height:40px; line-height:40px;">
-                                {{ comment.author.email[0]|upper }}
+                            <div class="rounded-circle bg-primary text-white text-center fw-bold"
+                                style="width:40px; height:40px; line-height:40px;">
+                                {{ comment.author.email|slice(0, 1)|upper }}
                             </div>
                         </div>
                         <div>
-                            <div class="fw-bold">
+                            <div class="fw-bold mb-1">
                                 {{ comment.author.email }}
-                                <small class="text-muted ms-2">{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i') : 'Just now' }}</small>
                             </div>
                             <p class="mb-1">{{ comment.content }}</p>
                         </div>

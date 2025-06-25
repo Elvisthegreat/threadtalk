@@ -28,6 +28,7 @@ final class ThreadController extends AbstractController
     public function show(Threadtalk $thread, Request $request, EntityManagerInterface $manager): Response
     {
         $comment = new Comment();
+        $comment->setThread($thread);
         $comment->setAuthor($this->getUser());
 
         $form = $this->createForm(CommentTypeForm::class, $comment);
