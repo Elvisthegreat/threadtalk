@@ -23,7 +23,7 @@ final class ThreadController extends AbstractController
         ]);
     }
 
-    // Show a specific trend and ensures only numeric IDs are passed <\d+>
+    // Show a specific trend and ensures only numeric IDs are passed <\d+> and handle comments
     #[Route('/threads/{id<\d+>}', name : 'thread_show')]
     public function show(Threadtalk $thread, Request $request, EntityManagerInterface $manager): Response
     {
@@ -122,5 +122,19 @@ final class ThreadController extends AbstractController
         return $this->render('thread/delete.html.twig', [
             'id' => $thread->getId(),
         ]);
+    }
+
+    // Edit a comment
+    #[Route('/comment/edit/{id<\d+>}', name: 'comment_edit')]
+    public function editComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
+    {
+        return $this->render('edit');
+    }
+
+    // Delete a comment
+    #[Route('/comment/delete/{id<\d+>}', name: 'comment_delete')]
+    public function deleteComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
+    {
+        return $this->render('delete');
     }
 }
