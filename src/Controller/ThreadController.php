@@ -128,13 +128,40 @@ final class ThreadController extends AbstractController
     #[Route('/comment/edit/{id<\d+>}', name: 'comment_edit')]
     public function editComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
     {
-        return $this->render('edit');
+        $form = $this->createForm(CommentTypeForm::class, $comment);
+        $form->handleRequest($request);
+
+        if( $form->isSubmitted() && $form->isValid()) {
+            $manager->persist($comment);
+            $manager->flush();
+
+            $this->addFlash('notice', 'Comment updated successfully.');
+            return $this->redirectToRoute('thread_show', [
+                'id' => $comment->getThread()->getId()
+            ]);
+        }
+        return $this->render('comment/edit.html.twig', [
+            'form' => $form->createView(),
+]);
+
     }
 
     // Delete a comment
     #[Route('/comment/delete/{id<\d+>}', name: 'comment_delete')]
     public function deleteComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
     {
-        return $this->render('delete');
+        if( $request->isMethod('POST')) {
+            $manager->remove($comment);
+            $manager->flush();
+            $this->addFlash('notice', 'Comment deleted successfully.');
+
+            // Redirect to the thread after deleting the comment
+            return $this->redirectToRoute('thread_show', [
+                'id' => $comment->getThread()->getId()
+            ]);
+        }
+        return $this->render('thread/delete.html.twig', [
+            'comment' => $comment,
+        ]);
     }
 }
