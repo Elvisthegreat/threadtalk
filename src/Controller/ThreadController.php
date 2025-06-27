@@ -140,7 +140,7 @@ final class ThreadController extends AbstractController
                 'id' => $comment->getThread()->getId()
             ]);
         }
-        return $this->render('comment/edit.html.twig', [
+        return $this->render('thread/edit.html.twig', [
             'form' => $form->createView(),
         ]);
 
