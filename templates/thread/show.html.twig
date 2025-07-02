@@ -32,6 +32,7 @@
 							<div class="fw-bold mb-1">
 								{{ comment.author.username }}
 							</div>
+                            
 							<p class="mb-1" id="comment{{ comment.id }}">{{ comment.content }}</p>
 							{% if app.user and app.user.id == comment.author.id %}
 								<button class="btn-edit btn btn-sm btn-outline-primary" data-comment_id="{{ comment.id }}">
@@ -49,6 +50,30 @@
 			{% endfor %}
 
 			<hr class="my-4"/>
+			
+			<!-- Delete confirmation modal -->
+			<div class="modal" id="deleteModal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Delete Comment</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Are you sure you want to delete your comment? This action cannot be undone.</p>
+							<div class="fw-2">
+								{% for comment in thread.comments %}
+									<small>{{ comment.content }}</small>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button"id="deleteConfirm" class="btn btn-danger">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<h3 class="mb-3">Leave a Comment</h3>
 			{{ form_start(form, { attr: { id: 'commentForm' }}) }}

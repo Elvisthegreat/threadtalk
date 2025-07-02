@@ -27,4 +27,18 @@ document.addEventListener("DOMContentLoaded", () => {
       commentForm.scrollIntoView({ behavior: "smooth" });
     });
   }
+
+  // Delete Comment Functionality
+  const deleteConfirm = document.getElementById("deleteConfirm");
+  const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+  const deleteButtons = document.getElementsByClassName("btn-delete");
+
+  for (let button of deleteButtons) {
+    button.addEventListener("click", (e) => {
+      const commentId = button.getAttribute("data-comment_id");
+      deleteConfirm.setAttribute("data-comment_id", commentId);
+      deleteModal.show();
+    });
+  }
+
 });
