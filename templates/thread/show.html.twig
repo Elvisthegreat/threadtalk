@@ -61,7 +61,7 @@
 						</div>
 						<div class="modal-body">
 							<p>Are you sure you want to delete your comment? This action cannot be undone.</p>
-							<div class="fw-2">
+							<div class="fw-bold mb-2">
 								{% for comment in thread.comments %}
 									<small>{{ comment.content }}</small>
 								{% endfor %}
@@ -69,12 +69,12 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							<button type="button"id="deleteConfirm" class="btn btn-danger">Delete</button>
+							<a type="button" id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
 						</div>
 					</div>
 				</div>
 			</div>
-
+		     
 			<h3 class="mb-3">Leave a Comment</h3>
 			{{ form_start(form, { attr: { id: 'commentForm' }}) }}
 			<div class="mb-3">
