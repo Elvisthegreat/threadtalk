@@ -150,7 +150,7 @@ final class ThreadController extends AbstractController
     #[Route('/comment/delete/{id<\d+>}', name: 'comment_delete')]
     public function deleteComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
     {
-        if( $request->isMethod('POST')) {
+        if ($comment->getAuthor() === $this->getUser()) {
             $manager->remove($comment);
             $manager->flush();
             $this->addFlash('notice', 'Comment deleted successfully.');
@@ -160,8 +160,10 @@ final class ThreadController extends AbstractController
                 'id' => $comment->getThread()->getId()
             ]);
         }
-        return $this->render('thread/delete.html.twig', [
-            'comment' => $comment,
+
+        $this->addFlash('error', 'You are not authorized to delete this comment.');
+        return $this->redirectToRoute('thread_show', [
+            'id' => $comment->getThread()->getId()
         ]);
     }
 }

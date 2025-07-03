@@ -45,7 +45,7 @@ for (let button of deleteButtons) {
     const commentId = e.target.getAttribute("data-comment_id");
 
     // Set the 'action' attribute of the deleteConfirm form dynamically based on the comment ID
-    deleteConfirm.href = `/comment/delete/${commentId}`;
+    deleteConfirm.href = `/comment/delete/${commentId}/`;
 
     // Show the Bootstrap modal to confirm deletion
     deleteModal.show();
