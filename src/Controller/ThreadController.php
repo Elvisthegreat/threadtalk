@@ -30,6 +30,7 @@ final class ThreadController extends AbstractController
         $comment = new Comment();
         $comment->setThread($thread);
         $comment->setAuthor($this->getUser());
+        $commentCount = $thread->getComments()->count();
 
         $form = $this->createForm(CommentTypeForm::class, $comment);
         $form->handleRequest($request);
@@ -44,6 +45,7 @@ final class ThreadController extends AbstractController
 
         return $this->render('thread/show.html.twig', [
             'thread' => $thread,
+            'commentCount' => $commentCount,
             'form' => $form->createView(),
         ]);
 

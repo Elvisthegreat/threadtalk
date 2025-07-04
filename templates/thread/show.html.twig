@@ -25,6 +25,9 @@
 		<!-- Comments Section -->
 		<div class="mt-4">
 			<h3 class="mb-4">Comments</h3>
+			{% if commentCount > 0 %}
+				<p class="text-muted mb-3">{{ commentCount }} {{ commentCount == 1 ? 'Comment' : 'Comments' }}</p>
+			{% endif %}
 			{% for comment in thread.comments %}
 				<div class="card mb-3 shadow-sm">
 					<div class="card-body d-flex align-items-start">
