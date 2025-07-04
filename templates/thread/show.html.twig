@@ -15,7 +15,9 @@
 							<a href="{{ path('thread_delete', {'id' : thread.id}) }}" class="btn btn-sm btn-outline-primary shadow-sm px-2 btn-hover">Delete Trend</a>
 						{% endif %}
 					</div>
-					<small class="muted text-end p-2">Creator: <em>{{ thread.author.username }}</em></small>
+					<small class="muted text-end p-2">Creator:
+						<em>{{ thread.author.username }}</em>
+					</small>
 				</div>
 			</div>
 		</div>
@@ -35,15 +37,26 @@
 							<div class="fw-bold mb-1">
 								{{ comment.author.username }}
 							</div>
-                            
+
 							<p class="mb-1" id="comment{{ comment.id }}">{{ comment.content }}</p>
 							{% if app.user and app.user.id == comment.author.id %}
-								<button class="btn-edit btn btn-sm btn-outline-primary" data-comment_id="{{ comment.id }}">
-									Edit
-								</button>
-								<button class="btn-delete btn btn-sm btn-outline-danger" data-comment_id="{{ comment.id }}">
-									Delete
-								</button>
+								<div class="dropdown">
+									<button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+										⋯
+									</button>
+									<ul class="dropdown-menu">
+										<li>
+											<button class="dropdown-item btn-edit" data-comment_id="{{ comment.id }}">
+												Edit
+											</button>
+										</li>
+										<li>
+											<button class="dropdown-item btn-delete text-danger" data-comment_id="{{ comment.id }}">
+												Delete
+											</button>
+										</li>
+									</ul>
+								</div>
 							{% endif %}
 						</div>
 					</div>
@@ -52,8 +65,9 @@
 				<p class="text-muted fst-italic">No comments yet. Be the first to share your thoughts!</p>
 			{% endfor %}
 
-			<hr class="my-4"/>
-			
+			<hr
+			class="my-4"/>
+
 			<!-- Delete confirmation modal -->
 			<div class="modal" id="deleteModal" tabindex="-1">
 				<div class="modal-dialog">
@@ -64,7 +78,7 @@
 						</div>
 						<div class="modal-body">
 							<p>Are you sure you want to delete your comment? This action cannot be undone.</p>
-							
+
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -73,7 +87,7 @@
 					</div>
 				</div>
 			</div>
-		     
+
 			<h3 class="mb-3">Leave a Comment</h3>
 			{{ form_start(form, { attr: { id: 'commentForm' }}) }}
 			<div class="mb-3">
