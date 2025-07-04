@@ -17,7 +17,13 @@ class CommentTypeForm extends AbstractType
     {
         $builder
             ->add('content',TextareaType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Write your comment here...',
+                    'rows' => 4,
+                    'cols' => 50,
+                    'class' => 'form-control'
+                ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Add Comment',

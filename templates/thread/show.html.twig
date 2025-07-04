@@ -15,6 +15,7 @@
 							<a href="{{ path('thread_delete', {'id' : thread.id}) }}" class="btn btn-sm btn-outline-primary shadow-sm px-2 btn-hover">Delete Trend</a>
 						{% endif %}
 					</div>
+					<small class="muted text-end p-2">Creator: <em>{{ thread.author.username }}</em></small>
 				</div>
 			</div>
 		</div>
