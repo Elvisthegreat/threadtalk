@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment
 {
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Threadtalk $thread = null;
 
     public function getThread(): ?Threadtalk
