@@ -12,7 +12,10 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ thread.title }}</h5>
                         <a href="{{ path('thread_show', {'id': thread.id}) }}">
-                            <p class="card-text">{{ thread.description }}</p>
+                            <p class="card-text">{{ thread.description|length > 100 
+                                ? thread.description|slice(0, 100) ~ '...' 
+                                : thread.description }}
+                            </p>
                             <small class="text-muted"><em>Created on:</em> {{ thread.createdAt|date('Y-m-d H:i') }}</small>
                         </a>
                     </div>
